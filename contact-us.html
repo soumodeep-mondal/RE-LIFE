@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.aivahthemes.com/site-templates/labora/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 28 Aug 2023 18:38:40 GMT -->
+<head>
+	<meta charset="UTF-8">
+	<title>Contact Us</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="assets/js/jquery.js"></script>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,900%7CPoppins:300,400,800&amp;subset=latin-ext" rel="stylesheet">
+
+	<!-- Font Awesome and peStroke Icons -->
+	<link rel="stylesheet" type="text/css" href="assets/css/fontawesome/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+
+	<!-- Required CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/shortcodes.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+	rel="stylesheet"
+  />
+	<!-- PrettyPhoto -->
+	<link rel="stylesheet" type="text/css" href="assets/css/prettyPhoto.css">
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+
+	<!-- Required Scripts -->
+	<script src="assets/js/superfish.js"></script>
+	<script src="assets/js/hoverIntent.js"></script>
+	<script src="assets/js/jquery.sticky.js"></script>
+	<script src="assets/js/labora-custom.js"></script>
+
+	<!-- Google Maps API Key -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv5eWuEipRmZz7jJU2lnpqCbwVq4PDVCQ&amp;callback=myMap" async defer></script>
+	<!-- Angular Contact Form -->
+	<script src="assets/js/angular.min.js"></script>
+	<script>
+		var map;
+		function myMap() {
+			var mapOptions = {
+			center: new google.maps.LatLng(51.5, -0.12),
+			zoom: 10,
+			mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	}
+	</script>
+	<script>
+		var app =  angular.module('contact_form', []);
+		app.controller('formController', function($scope,$http,$timeout) {
+			$scope.submitForm = function() {
+
+				 $scope.formData = {};
+				$http({
+						method : "POST",
+						url : "mail.php",
+						data: { name: $scope.name, email: $scope.email,subject: $scope.subject,message: $scope.message},
+						 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+					}).then(function (response) {
+						data=response.data;
+					if (!data.success) {
+						// if not successful, bind errors to error variables
+						$scope.errorName = data.errors.name;
+						$scope.errorMail = data.errors.email;
+						$scope.errorPhone = data.errors.phone;
+						$scope.errorNotes = data.errors.notes;
+						$scope.messages = null;
+					}
+					else {
+						// if successful, bind success message to message
+						//$scope.errorName = $scope.errorMail = $scope.errorSubject = null;
+							$scope.name = '';
+							$scope.email ='';
+							$scope.subject= '';
+							$scope.message ='';
+							$scope.c_form.$setPristine();
+							$scope.messages = data.messages;
+							$timeout(function() {
+
+							        // Loadind done here - Show message for 3 more seconds.
+							        $timeout(function() {
+							          $scope.messages = false;
+							        }, 3000);
+
+							      }, 2000);
+
+
+					}
+				},function (error){
+
+				});
+			}
+		});
+	</script>
+</head>
+<body data-ng-app="contact_form" >
+	<div class="labora_page_loader" style="display: none;"></div>
+	<div id="wrapper">
+
+<!--
+		<div class="topbar">
+
+			<div class="inner">
+
+				<div class="topbar-left">
+					<aside id="text-2" class=" widget_text">
+						<div class="textwidget">Molecular biology laboratories + Life science laboratories</div>
+					</aside>
+				</div>
+				<div class="topbar-right">
+					<aside id="nav_menu-2" class=" widget_nav_menu">
+						<div class="menu-topbar-menu-container">
+							<ul id="menu-topbar-menu" class="menu">
+								<li><a href="#">Help</a></li>
+								<li><a href="#">FAQ's</a></li>
+								<li><a href="#">Press</a></li>
+								<li><a href="#">Legal</a></li>
+							</ul>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div> -->
+
+
+		<header class="header-style2">
+			<div class="header">
+				<div class="header-area">
+					<!--<div class="widget-left-s2"></div>-->
+					<div class="logo">
+						<a href="index-2.html" title="Labora Medical and Laboratory">
+						<img src="assets/images/logo.png" alt="Labora Medical and Laboratory" width="100%" height="35">
+						</a>
+					</div>
+					<!--<div class="widget-right-s2"></div>-->
+					<div id="iva-mobile-nav-icon" class="iva-mobile-dropdown"><span></span><span></span><span></span><span></span></div>
+				</div><!-- .header-area-->
+
+				<div class="primarymenu menuwrap">
+					<div class="menu-inner">
+						<ul class="sf-menu">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about-us.html">About Us</a></li>
+							<li><a href="gallery.html">Gallery</a></li>
+							<li><a href="research_division.html">Research Division</a></li>
+							<li><a href="contact-us.html">Contact Us</a></li>
+						</ul><!-- .sf-menu-->
+					</div><!-- .menu-inner-->
+				</div><!-- primarymenu -->
+
+				<div class="widget-left-s3-mobile">
+					<div class="widget-left-s3"></div>
+				</div>
+				<div class="iva-mobile-menu" style="display: none;">
+					<ul class="iva_mmenu">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="about-us.html">About Us</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="research_division.html">Research Division</a></li>
+						<li><a href="contact-us.html">Contact Us</a></li>
+
+				 	</ul>
+				</div><!-- .iva-mobile-menu-->
+			</div><!-- .header-->
+		</header>
+
+		<div id="subheader" class="sleft">
+			<div class="subheader-inner">
+				<div class="subdesc">
+					<h1 class="page-title">Contact Us</h1>
+				</div>
+				<div class="breadcrumb-main">
+					<div class="breadcrumb-wrap inner">
+						<div class="breadcrumbs">
+							<!-- Breadcrumb NavXT 5.7.1 -->
+							<span><a href="index-2.html" class="home">Home</a></span>
+							<span><i class="fa fa-angle-right"></i></span>
+							<span><span>Contact Us</span></span>
+						</div><!-- .breadcrumbs-->
+					</div><!-- .breadcrumb-wrap-->
+				</div><!-- .breadcrumb-main-->
+			</div><!-- .subheader-inner-->
+		</div><!-- #subheader-->
+
+		<div id="main">
+			<div id="primary" class="pagemid">
+				<div class="inner">
+					<main class="content-area">
+						<div class="entry-content-wrapper">
+
+							<div class="ct-section1">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471306.0396948516!2d88.24715206633991!3d22.650864038923842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8b342106874e9%3A0xb465a601bd2cb8b8!2sChanditala%20Ghat!5e0!3m2!1sen!2sin!4v1693504231354!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+							</div>
+
+							<div class="ct-section2" style="padding: 80px 0">
+
+								<div class="one_third">
+									<div class="aligncenter">
+										<i style="font-size:44px;color:#990b6e;" class="fa fa-envelope-o"></i>
+										<div class="demo_space" style="height:20px"></div>
+										<h4>Have any questions?</h4>
+										<hr class="ct-hr">
+										<h5>contact@metropolitan.com</h5>
+									</div>
+								</div>
+								<div class="one_third">
+									<div class="aligncenter">
+										<i style="font-size:44px;color:#990b6e;" class="fa fa-whatsapp"></i>
+										<div class="demo_space" style="height:20px"></div>
+										<h4>WhatsApp</h4>
+										<hr class="ct-hr">
+										<h5>+91 9732570771</h5>
+									</div>
+								</div>
+								<div class="one_third last">
+									<div class="aligncenter">
+										<i style="font-size:44px;color:#990b6e;" class="fa fa-phone"></i>
+										<div class="demo_space" style="height:20px"></div>
+										<h4>Contact Us</h4>
+										<hr class="ct-hr">
+										<h5>+91 9732570771</h5>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+
+							<div class="ct-section3">
+								<div class="two_third">
+									<div class="section-inner clearfix">
+
+										<div class="fancyheading left">
+											<h3 class="fancy-title">
+												<span style="color:#444444;"><strong>GET IN TOUCH</strong><small></small></span>
+											</h3>
+										</div>
+
+										<div id="form" data-ng-controller="formController">
+
+													<div id="messages" class="well" data-ng-show="messages"><div class="iva_message_box success iva-box-solid iva-box-large clearfix">
+													<div class="iva_message_box_content">{{messages}}</div></div>
+												</div>
+
+												<form name="c_form" novalidate>
+													<p><input type="text" name="name" placeholder="Name" data-ng-class="{ 'has-error' : c_form.name.$invalid && !c_form.name.$pristine}" data-ng-model='name' required></p>
+													<p><input type="email" data-ng-class="{ 'has-error' : c_form.email.$invalid && !c_form.email.$pristine}" name="email" placeholder="Email" data-ng-model="email" required>
+
+													</p>
+													<p ><input type="text" data-ng-class="{ 'has-error' : c_form.subject.$invalid && !c_form.subject.$pristine}" name="subject" size="40" placeholder="Subject" data-ng-model="subject" required>
+													</p>
+													<p><textarea name="message" cols="40" rows="10" data-ng-model="message" placeholder="Tell us about your Query"></textarea></p>
+													<p><input type="submit" data-ng-click="submitForm()"   data-ng-disabled="c_form.$invalid" value="SEND MESSAGE" ></p>
+												</form>
+
+										</div><!--form-->
+
+									</div>
+
+
+								</div>
+
+								<div class="one_third last ct-office">
+
+									<div class="fancyheading left">
+										<h3 class="fancy-title">
+											<span style="color:#444444;"><strong>Name of Organization</strong><small></small></span>
+										</h3>
+									</div>
+
+									<p style="font-weight: 500;">RE-LIFE PHARMACEUTICALS,
+										Manufacturer of Ayurvedic
+										Medicine, Licence No AL 785 (M)
+										GMP Certified Concern,
+										Government order supplier.<br></p>
+
+										<div class="fancyheading left">
+											<h3 class="fancy-title">
+												<span style="color:#444444;"><strong>Address</strong><small></small></span>
+											</h3>
+										</div>
+
+									<div class="contactinfo-wrap">
+										<p><i class="fa fa-map-marker fa-fw"></i> VILL- CHANDITALA, P.O- KHANTURA, DIST- 24 PARGANAS (N) PIN 743273, W.B H.O. 11 NO AMRATALA STREET 1° FLOOR KOLKATA 700001</p>
+										<p><i class="fa fa-fax fa-fw"></i> +91 9732570771</p>
+									</div>
+
+										<div class="fancyheading left">
+											<h3 class="fancy-title">
+												<span style="color:#444444;"><strong>Registered Office</strong><small></small></span>
+											</h3>
+										</div>
+									<div class="contactinfo-wrap">
+										<p><i class="fa fa-map-marker fa-fw"></i> 11 NO. AMARATALA Street 17 Floor Kolkata - 700001</p>
+									</div>
+
+								</div>
+							</div><!--.ct-section3-->
+						</div><!--entry-content-wrapper clearfix-->
+					</main>
+				</div><!--inner-->
+			</div><!--.pagemid-->
+		</div><!--main-->
+		<div id="footer">
+			<div class="footer-area-middle">
+				<div class="inner">
+					<div class="inner-row">
+						<aside id="text-4" class="whitetext widget widget_text  col_3">
+							<div class="textwidget">
+								<p><img src="assets/images/logo.png" alt="Labora"></p>
+							</div>
+						</aside>
+						<aside id="nav_menu-6" class="widget widget_nav_menu  col_3">
+							<h3 class="widget-title">RE-LIFE</h3>
+							<div class="menu-footer-one-container">
+							<p>RE-LIFE PHARMACEUTICALS,
+								Manufacturer of Ayurvedic
+								Medicine, Licence No AL 785 (M)
+								GMP Certified Concern,
+								Government order supplier.</p>
+							</div>
+						</aside>
+						<aside id="nav_menu-5" class="widget widget_nav_menu  col_3">
+							<h3 class="widget-title">Quick Links</h3>
+							<div class="menu-footer-one-container">
+								<ul class="menu">
+									<li><a href="#">Home</a></li>
+									<li><a href="about-us.html">About Us</a></li>
+									<li><a href="about-us.html">Pharma Division</a></li>
+									<li><a href="about-us.html">Raw materials standardize  Division</a></li>
+									<li><a href="about-us.html">Research Division</a></li>
+									<li><a href="contact-us.html">Contact Us</a></li>
+								</ul>
+							</div>
+						</aside>
+						<aside id="contactinfo_widgets-2" class="widget contactinfo-wg  col_3">
+							<h3 class="widget-title">LETS TALK</h3>
+							<div class="contactinfo-wrap">
+								<p><span class="icon fa fa-location-arrow fa-lg"></span>
+									<span class="details">
+										VILL- CHANDITALA, P.O- KHANTURA, DIST- 24 PARGANAS (N) PIN 743273, W.B
+										H.O. 11 NO AMRATALA STREET 1° FLOOR KOLKATA 700001</span>
+								</p>
+								<p class="phone">
+									<span class="icon fa fa-phone fa-lg"></span>
+									<span class="details">+91 9732570771</span>
+								</p>
+								<p>
+									<span class="icon fa fa-map-marker fa-lg"></span>
+									<span class="details"><a class="more-link" target="_blank" href="#">View Map</a></span>
+								</p>
+							</div>
+						</aside>
+					</div><!-- inner-row -->
+				</div><!-- inner -->
+			</div><!-- .footer-area-middle-->
+	
+			<div class="footer-area-bottom">
+				<div class="inner">
+					<aside id="text-7" class="textcenter widget widget_text">
+						<div class="textwidget">
+							 &copy; Copyright 2023 RE-LIFE PHARMACEUTICALS. All Right Reserved. Developed by <a href="">Smart Solutions</a>
+						</div>
+					</aside>
+				</div>
+			</div>
+	
+		</div><!-- #footer -->
+
+</div><!-- #wrapper-->
+<div class="icon-bar1">
+	<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+	<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+	<a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
+	<a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+	<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+  </div>
+
+<div id="back-top"><a href="#header" title="Scroll Top"><span class="fa fa-angle-up fa-fw fa-2x"></span></a></div>
+
+</body>
+
+<!-- Mirrored from www.aivahthemes.com/site-templates/labora/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 28 Aug 2023 18:38:47 GMT -->
+</html>
